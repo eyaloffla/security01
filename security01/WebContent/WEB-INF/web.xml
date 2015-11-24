@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0"
+    xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <display-name>customAuth</display-name>
+
+    <!--servlet>
+        <servlet-name>CustomOAuthSampleApplication</servlet-name>
+        <servlet-class>org.apache.wink.server.internal.servlet.RestServlet</servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>com.ibm.gbscompatibility.CustomOAuthSampleApplication</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CustomOAuthSampleApplication</servlet-name>
+        <url-pattern>/apps/*</url-pattern>
+    </servlet-mapping-->
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>default.html</welcome-file>
+        <welcome-file>default.htm</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
+    </welcome-file-list>
+
+    <security-constraint>
+           <web-resource-collection>
+              <web-resource-name>CustomOAuthSampleApplication</web-resource-name>
+              <url-pattern>/apps/*</url-pattern>
+           </web-resource-collection>
+          <auth-constraint>
+             <role-name>TAIUserRole</role-name>
+          </auth-constraint>
+    </security-constraint>
+    <security-role id="SecurityRole_TAIUserRole" >
+           <description>This is the role that MFP OAuthTAI uses to protect the resource. It must be mapped to 'All Authenticated in Application' in WAS and to 'ALL_AUTHENTICATED_USERS' in Liberty.</description> 
+           <role-name>TAIUserRole</role-name>
+    </security-role>
+</web-app>
