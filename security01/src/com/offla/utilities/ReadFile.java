@@ -11,97 +11,73 @@ import java.util.stream.Stream;
 
 public class ReadFile {
 	
+	private static final String fileName = "C:/Users/eyal/Documents/Temporary/SortedSumofIDandDateWithoutDuplicates.txt";
+	
+	
+	
 	public static void main(String args[]) {
 
-		String fileName = "C:/Users/eyal/Documents/Temporary/SortedSumofIDandDateWithoutDuplicates.txt";
-		List<String> list = new ArrayList<>();
-		Stream<String> stream = null;
 		
+		String number = "317755361";
 		
-		try {
-			
-			stream = Files.lines(Paths.get(fileName));
-			}catch(Exception e){
-		}
+		ReadFile rd = new ReadFile();
+		rd.isInTheList(number);
 		
-
-		//	 list = stream.collect(Collectors.toList());
-			
-			
-			 
-			 boolean b = isPersonInTheList(stream,   1111111);                                  //  100000326);
-			 System.out.println("Result is: " + b);
-			
-			// int size = list.size();
-			// System.out.println("Size list: " + size);
-			//stream.forEach(System.out::println);
-				
-			 
-		
-		ReadFile rf = new ReadFile();
-		
-		
-		
-	//	System.out.println("The person is in the list: " + rf.isPersonInTheList(list, 11111111));
-
 	}
 	
-	private static boolean isPersonInTheList(Stream<String> stream, int numberToCheck){
+	
+	public boolean isInTheList(String number){
 		
+		boolean b = isPersonInTheList(number);
+		System.out.println(" \n Result for " + number + " : " + b);
+		return b;
+	}
+	
+	private boolean isPersonInTheList(String numberToCheck){
+		
+		Stream<String> stream = null;
 		boolean result = false;
-		String valor = "";
+		String value = "";
+		
+       try {
+			stream = Files.lines(Paths.get(fileName));
+		}catch(Exception e){
+	   }
+		
 		
 		try{
 		
-		 valor = stream.filter(s -> stringToInteger(s)== numberToCheck).findFirst().get();
+		 value = stream.filter(s -> s.trim().equals(numberToCheck)).findFirst().get();
+		 if(value.length()>1){
+			 result = true;
+		 }
 		
 		}
 		catch (java.util.NoSuchElementException e) {
 			//e.printStackTrace();
 		}
 		
-		System.out.println("The value is: " + valor);
-		
 		return result;
 		
 	}
 	
-	private static int stringToInteger(String s){
-		
-		int n = 0;
-		
-		try{
-			   n = Integer.parseInt(s);
-			}
-			catch(Exception e){
-				
-			}
-		return n;
-	}
 	
 	
-	private boolean isPersonInTheList(List<String> numberList, int numberToCheck){
+	private static boolean isPersonInTheList(List<String> numberList, String numberToCheck){
+		
+		//List<String> list = new ArrayList<>();
+        //list = stream.collect(Collectors.toList());
 		
 		boolean result = false;
-		int n = 0;
 		
 		for(String s : numberList){
 			
 			s = s.trim();
-			
-			try{
-			   n = Integer.parseInt(s);
-			}
-			catch(Exception e){
-				
-			}
-			  
-			if(n==numberToCheck){
+			if(s.trim().equals(numberToCheck)){
 				result = true;
 			}
 	  }
-		
-		 return result;
+	 return result;
 	}
 
 }
